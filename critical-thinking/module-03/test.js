@@ -1,0 +1,5 @@
+
+
+const myArr=[]
+
+myArr.pop

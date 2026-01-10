@@ -1,0 +1,2 @@
+this is a text from write-file.js
+this is added after
