@@ -1,3 +1,5 @@
+import { readUsers, writeUsers } from "../helpers/fileDb";
+import parseBody from "../helpers/parseBody";
 import addRoutes from "../helpers/RouteHandler";
 import sendJson from "../helpers/sendJson";
 
@@ -9,23 +11,31 @@ addRoutes("GET", "/", (req, res) => {
   });
 });
 
-addRoutes("POST", "/users", (req, res) => {
-  let body: Buffer[] = [];
-  req.on("data", (chunk) => {
-    body.push(chunk);
-  });
+addRoutes("POST", "/users", async (req, res) => {
+  const newUser = await parseBody(req);
+  const users = await readUsers();
+  users.push(newUser);
 
-  req.on("end", () => {
-    console.log("buffer received", body.length);
-    const fullBody = Buffer.concat(body);
-    const receivedText = fullBody.toString("utf-8");
-    sendJson(res, 200, JSON.parse(receivedText));
-  });
+  await writeUsers(users);
+  sendJson(res, 200, newUser);
 });
 
-addRoutes("GET", "/users", (req, res) => {
-  sendJson(res, 200, [
-    { id: 1, name: "Hamim" },
-    { id: 2, name: "Shoeb" },
-  ]);
+addRoutes("GET", "/users", async (req, res) => {
+  const users = await readUsers();
+  sendJson(res, 200, users);
 });
+
+addRoutes("GET", "/users", async (req, res) => {
+  const users = await readUsers();
+  sendJson(res, 200, users);
+});
+
+addRoutes('GET','/users/:id',async(req,res)=>{
+  // const {id} = req.params;
+  const id=req.params?.id
+  console.log(id);
+  const users=await readUsers()
+  const user=users.find((user:{id?:string})=>user?.id==id)
+  sendJson(res,200,user)
+
+})

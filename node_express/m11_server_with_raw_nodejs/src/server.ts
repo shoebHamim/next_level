@@ -1,18 +1,21 @@
 import http, { IncomingMessage, Server, ServerResponse } from "http";
 import config from "./config/index";
 import sendJson from "./helpers/sendJson";
-import { RouteHandler, routes } from "./helpers/RouteHandler";
+import { getHandler } from "./helpers/RouteHandler";
 import "./routes/index";
 
+export interface CustomRequest extends IncomingMessage {
+  params?: Record<string, string>;
+}
+
 const server: Server = http.createServer(
-  (req: IncomingMessage, res: ServerResponse) => {
+  (req: CustomRequest, res: ServerResponse) => {
     console.log("Server hit on URL=>", req.url);
 
     const path = req.url || "";
     const method = req.method?.toUpperCase() || "";
-    // console.log('total available routes->',routes);
-    const methodMap = routes.get(method);
-    const handler: RouteHandler | undefined = methodMap?.get(path);
+
+    const handler = getHandler(method, path);
 
     if (handler) {
       handler(req, res);
