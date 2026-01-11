@@ -1,14 +1,16 @@
-import { Request, Response } from "express";
 import { pool } from "../../config/db";
+import bcrypt from "bcryptjs";
+import config from "../../config";
 
-const createUser = async (name: string, email: string) => {
+const createUser = async (name: string, email: string, password: string,role:string) => {
+  const hashedPassword = await bcrypt.hash(password, Number(config.hash_round));
   const result = await pool.query(
     `
-        INSERT INTO users(name,email)
-        VALUES($1,$2)
+        INSERT INTO users(name,email,password,role)
+        VALUES($1,$2,$3,$4)
         RETURNING *
         `,
-    [name, email]
+    [name, email, hashedPassword,role]
   );
   return result;
 };
@@ -51,5 +53,5 @@ export const userServices = {
   getUser,
   updateUser,
   deleteUser,
-  getAllUsers
+  getAllUsers,
 };

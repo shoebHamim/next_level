@@ -1,9 +1,9 @@
-import {Pool} from 'pg';
-import config from './index'
+import { Pool } from "pg";
+import config from "./index";
 
-export const pool=new Pool({
-  connectionString: config.connection_str
-})
+export const pool = new Pool({
+  connectionString: config.connection_str,
+});
 
 const initDB = async () => {
   await pool.query(`
@@ -12,6 +12,7 @@ const initDB = async () => {
     name VARCHAR(100) NOT NULL,
     email VARCHAR(150) UNIQUE NOT  NULL,
     password TEXT NOT NULL,
+    role  VARCHAR(50),
     age INT,
     phone VARCHAR(20),
     address TEXT,
