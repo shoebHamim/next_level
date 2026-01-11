@@ -1,0 +1,21 @@
+
+1. add this file in the root directory:
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "dist/server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "dist/server.js"
+    }
+  ],
+  "outputDirectory": "dist"
+}
+
+2. to see vercel logs 
+use -> vercel logs deployment_url
