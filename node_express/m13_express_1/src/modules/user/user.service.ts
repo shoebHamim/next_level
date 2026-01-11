@@ -1,0 +1,55 @@
+import { Request, Response } from "express";
+import { pool } from "../../config/db";
+
+const createUser = async (name: string, email: string) => {
+  const result = await pool.query(
+    `
+        INSERT INTO users(name,email)
+        VALUES($1,$2)
+        RETURNING *
+        `,
+    [name, email]
+  );
+  return result;
+};
+
+const getUser = async (id: string) => {
+  const result = await pool.query(
+    `
+      SELECT * FROM users where id=$1
+      `,
+    [id]
+  );
+  return result;
+};
+
+const updateUser = async (name: string, email: string, id: string) => {
+  const result = await pool.query(
+    `
+      UPDATE users SET name=$1, email=$2
+      WHERE id=$3
+      RETURNING *
+   `,
+    [name, email, id]
+  );
+  return result;
+};
+
+const deleteUser = async (id: string) => {
+  return await pool.query(`DELETE from users WHERE id=$1`, [id]);
+};
+
+const getAllUsers = async () => {
+  const result = await pool.query(`
+      SELECT * FROM users
+      `);
+  return result;
+};
+
+export const userServices = {
+  createUser,
+  getUser,
+  updateUser,
+  deleteUser,
+  getAllUsers
+};
