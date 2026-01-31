@@ -17,5 +17,12 @@
   "outputDirectory": "dist"
 }
 
-2. to see vercel logs 
+2. add "build":"tsc" in package.json->scripts
+3. npm i -g vercel
+4. vercel login
+5. vercel -> follow the steps to deploy
+6. add the environment variables 
+
+
+* to see vercel logs 
 use -> vercel logs deployment_url
