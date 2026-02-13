@@ -13,7 +13,8 @@ alter table employee add column name VARCHAR(100);
 
 -- drop column
 alter table employee add column is_active boolean;
-
+alter table employee drop column is_active;
+ 
 -- rename column name
 alter table employee rename column name to user_name;
 
