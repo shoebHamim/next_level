@@ -11,21 +11,36 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  posts Post[]
+  id       Int      @id @default(autoincrement())
+  email    String   @unique
+  posts    Post[]
+  profile Profile?
+  role     ROLE     @default(USER)
 }
 
 model Post {
-  id        Int     @id @default(autoincrement())
-  title     String
-  content   String?
-  published Boolean @default(false)
-  author    User    @relation(fields: [authorId], references: [id])
-  authorId  Int
+  id          Int      @id @default(autoincrement())
+  title       String
+  content     String?
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+  user_id     Int
+  user        User     @relation(fields: [user_id], references: [id])
+}
+
+model Profile {
+  id          Int      @id @default(autoincrement())
+  bio         String
+  dateOfBirth DateTime
+  user_id     Int      @unique
+  user        User     @relation(fields: [user_id], references: [id])
+}
+
+enum ROLE {
+  USER
+  ADMIN
 }
