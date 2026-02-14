@@ -1,0 +1,24 @@
+/*
+
+1. read docs
+2. prisma basics
+3. prisma setup + db connection
+4. basic prisma schema, query
+5. prisma+node,express(small project)
+- ERD
+- Req. analysis
+- implementation
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
