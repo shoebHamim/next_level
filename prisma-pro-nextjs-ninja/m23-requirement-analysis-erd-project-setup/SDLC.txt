@@ -1,0 +1,70 @@
+Idea --> Production / Solo Founder / 0 --> 1 Builder 
+##############
+Planning --> Req. Analysis --> Design --> Development --> Testing --> Deployment --> Monitoring
+##############
+
+1. Planning (Business Analyst(BA) - Product Manager(PM) - Solution Architect(SA) hat)
+
+- Problem-Solution: Why the app exists(what problem it's solving), who it's for(target user), is it worth building/solving(how important/impactful the solution can be)?
+
+- Feasibility Analysis: Do a viability check (technical, financial, time, competitor analysis). Analyze rough scope,timeline,resources required and available. Might need a technical person like solution architect's knowledge for technical viability and cost estimation.  
+
+Example: "I want to build a habit tracker app for busy professionals.(why?- because it will help them build better habit,keep them disciplined, boost their productivity and increase quality of life, through more time,money and energy) I have 3 months, I'll build it solo, and I'll monetize via a one-time purchase."
+
+2. Requirements Analysis(BA-PM hat)
+You define what the system must do — both functionally and non-functionally. Write user stories,use cases, define acceptance criteria, list non-functional requirements (performance, security, scalability).
+Example:
+- "As a user, I can create a daily habit and mark it complete."
+- "The app must load in under 2 seconds."
+- "Support up to 10,000 users at launch."
+
+3. Design and Architecture
+3.1 System Design & Architecture(HLD+LLD)  (Solution Architect hat)
+You decide how the system will be built at a high level. You make the design decisions(microservice/monolith)
+Choose your tech stack, define the system components, data flow, database schema, API contracts, and infrastructure(system diagrams).
+
+Example:
+Frontend: React Native
+Backend: Node.js + Express REST API, API spec(Swagger/Graphql Schema)
+Database: PostgreSQL (habits, users, logs tables), ERD, 
+Cloud/Hosting: AWS (EC2 + RDS) (Architecture Diagram)
+Auth: JWT tokens
+
+3.2 UI/UX Design(Designer hat)
+You design what users will see and interact with.
+Create wireframes → mockups → prototypes. Define the user journey and screen flows before writing a single line of code.
+
+Example: Sketch the onboarding flow, home dashboard with habit list, and the "check-in" interaction using Figma or even pen and paper.
+
+4. Development and implementation
+4.1 Planning and Sprint Breakdown (PM-Scrum Master hat) 
+Convert requirements into development tasks.Task decomposition, sprint planning, timeline estimation, priority settings
+
+Example:
+Sprint 1 — Auth (register/login). Sprint 2 — Create/manage habits. Sprint 3 — Notifications. Sprint 4 — Analytics dashboard.
+
+4.2  Development (Engineer-TPM hat)
+You actually build the thing.
+
+Example: setup repo, CI pipeline, environments(dev/stg/prod), write code. Generate frontend, backend code, integrate database.
+
+5. Testing (SQA hat)
+You verify the app works correctly and doesn't break. Ensure the app is bug-free, secure, and stable.  Unit tests (individual functions), integration tests (API endpoints), end-to-end tests (full user flows), and manual exploratory testing.
+
+Example:
+ Test that creating a habit saves correctly to DB, marking complete updates the streak counter, and a bad login returns a proper error — not a 500 crash. Load test: 100 concurrent users
+
+6. Deployment (DevOps hat)
+You ship it to production.
+Set up your CI/CD pipeline to automate builds and deployments. Configure your production environment, environment variables, SSL, domain, and monitoring.
+
+Example: Push to main → GitHub Actions runs tests → builds Docker image → deploys to AWS → app is live at myhabitapp.com.
+
+7. Monitoring and Maintenance(SRE + Engineer + PM hat)
+You keep it running and healthy post-launch.
+Monitor errors, performance, and uptime. Patch bugs, apply security updates, and watch server costs. Also, add new feature, user feedback analysis, security patches etc. 
+
+Example: Set up Sentry for error tracking, Datadog or CloudWatch for performance, and set an alert if server CPU spikes above 80%.
+
+
+
