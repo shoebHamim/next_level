@@ -4,4 +4,5 @@
 4. Install prisma as dev dependency ->npm install prisma @types/node @types/pg --save-dev
 5. install prisma client, prisma adapter, pg, dotenv
 6. Initialize prisma -> npx prisma init --output ../generated/prisma
-7. 
+7. Create migration file -> npx prisma migrate dev
+8. gene
