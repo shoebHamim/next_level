@@ -1,0 +1,7 @@
+1. Initialize a node project -> npm init
+2. Install typescript as a dev dependency -> npm install typescript tsx @types/node --save-dev
+3. Initialize typescript project -> npx tsc --init
+4. Install prisma as dev dependency ->npm install prisma @types/node @types/pg --save-dev
+5. install prisma client, prisma adapter, pg, dotenv
+6. Initialize prisma -> npx prisma init --output ../generated/prisma
+7. 
