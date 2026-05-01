@@ -1,14 +1,17 @@
-
-
-
-const numbers=[100,1,2,3]
-
-// const result=numbers.reduce((prev,curr,idx,arr)=>{
-//   console.log('prev',prev);
-//   console.log('curr',curr);
-//   console.log('idx',idx);
-//   console.log('arr',arr);
-// })
+// At its core, reduce takes an array and turns it into a single value.
+const numbers=[100,1,2,3,6,7,3,2,7,-1]
+// form an array that has the value higher than 5
+const result=numbers.reduce((prev,curr,idx,arr)=>{
+  // console.log('prev',prev);
+  // console.log('curr',curr);
+  // console.log('idx',idx);
+  // console.log('arr',arr);
+  if(curr>5){
+    prev.push(curr)
+  }
+  return prev
+},[])
+console.log(result);
 
 // console.log(result);
 // When there's no initial value:
@@ -25,7 +28,7 @@ const numbers=[100,1,2,3]
 
 const sum=numbers.reduce((prev,curr)=>(prev>curr?prev:curr),0)
 
-console.log(sum);
+// console.log(sum);
 // reduce() returns whatever you return from the last iteration of the callback function.
 
 const players = [
@@ -37,5 +40,5 @@ const players = [
 ]
 
 const bestPlayer=players.reduce((prev,curr)=>curr.score>prev.score?curr:prev)
-console.log(bestPlayer);
+// console.log(bestPlayer);
 

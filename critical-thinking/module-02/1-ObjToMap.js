@@ -1,3 +1,4 @@
+//! Object limitation and map introduction 
 //! accessing properties in obj
 // 1. dot notation
 // Property names are valid identifiers (no spaces, don't start with numbers)
@@ -13,17 +14,17 @@
 
 // Rule of thumb: Use dot notation by default for cleaner code, switch to bracket notation when you need its flexibility.
 
-// ! [object object]
+// ! [object object] key: when object is used as key of an object, js converts that key into [object object]
 
-const keyObj1={'name':"ami key1"}
-const keyObj2={'name':"ami key2"}
+const keyObj1={name:"ami key1"}
+const keyObj2={name:"ami key2"}
 const valueObj1={name:"ami value1"}
 const valueObj2={name:"ami value2"}
 const obj={}
 obj.name='weird object'
 obj[keyObj1]=valueObj1
 obj[keyObj2]=valueObj2
-// console.log(obj);
+// console.log(obj); 
 // but the funny thing is
 // console.log(obj["[object Object]"]);
 //? the  keyObj1 is getting replaced by keyObj2 but why
@@ -31,6 +32,14 @@ obj[keyObj2]=valueObj2
 // All plain objects convert to the same string: "[object Object]".
 
 //! that's a limitation of object in js, it can't use object as key, only string(and symbol, which is not usually used) is available as key
+//! but would i need obj to be my obj's key?
+/**
+ * caching results based on complex object
+ * Some use case in DOM manipulation
+ * Some DS like graph can make use of that
+*/
+
+
 //!  MAP is the Savior
 const map= new Map()
 map.set(1,'programming')

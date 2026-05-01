@@ -96,7 +96,7 @@ const rawApiData = [
     stock: 60,
   },
 ];
-
+//! .filter, .sort, .slice, .map
 //? Output => [{ name: "Phone" }, { name: "Smart Watch" }]
 
 //* Process
