@@ -13,7 +13,7 @@ class Greeting{
 
 const greeting1=new Greeting('hamim')
 
-greeting1.greet('gamim')
+greeting1.greet('hamim')
 
 // console.log(greeting1);
 
