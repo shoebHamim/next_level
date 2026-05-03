@@ -1,0 +1,2 @@
+1. install typescript -> npm install -g typescript
+2. initiate typescript -> tsc --init 
