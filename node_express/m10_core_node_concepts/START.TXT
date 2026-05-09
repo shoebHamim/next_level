@@ -1,0 +1,4 @@
+1. initiate a node js project
+npm init
+2. initiate ts in the project 
+tsc -- init

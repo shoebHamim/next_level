@@ -22,12 +22,3 @@ export const add=(a,b)=>a+b
 // {
 //   "type": "module"
 // }
-
-{
-  "baseUrl": "https://api-amer.reverselogix.net",
-  "appId": "ifreturnsapi",
-  "appSecret": "qRpzf7AVtIRLYEBcbQu3",
-  "scope": "ifreturns",
-  "brand": "salomon",
-  "authToken": "aWZyZXR1cm5zYXBpOnFScHpmN0FWdElSTFlFQmNiUXUz"
-}
