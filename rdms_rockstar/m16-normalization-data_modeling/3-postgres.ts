@@ -3,7 +3,7 @@
 1. run the server from dbngin
 2. use psql to enter the server:
 psql -U postgres -d postgres
-3. \conninfo connection info 
+3. \conninfo or \c connection info 
 Queries
 1. \l     -> list all db
 2. \dt    -> all tables of current db

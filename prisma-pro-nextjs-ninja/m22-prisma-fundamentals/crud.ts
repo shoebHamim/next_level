@@ -12,7 +12,7 @@ const createUser = async () => {
 const createPost = async () => {
   const result = await prisma.post.create({
     data: {
-      title: "new post",
+      title: "hot post",
       user_id: 1,
     },
   });
@@ -72,8 +72,8 @@ const updateOrCreate=async()=>{
 }
 
 // await createUser()
-// await createPost()
+await createPost()
 // await getAllUsers();
 // await updateUser()
 // await deleteUser()
-await updateOrCreate()
+// await updateOrCreate()

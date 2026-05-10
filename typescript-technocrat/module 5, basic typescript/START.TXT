@@ -1,2 +1,18 @@
 1. install typescript -> npm install -g typescript
 2. initiate typescript -> tsc --init 
+3. compile ts -> js
+4. if you want to run a single ts file directly, without compiling 
+use ts-node or tsx 
+ts-node
+  The original tool. Uses the official TypeScript compiler (tsc) under the hood.
+  Does full type checking by default (slower, but catches type errors at run time).
+  Closely tied to your tsconfig.json — respects every compiler option.
+  Historically clunky with ESM ("type": "module"), which is exactly the error you just hit.
+  Use when: you want type-checking while running, or you're in a project already standardized on it.
+
+tsx
+  Newer tool. Uses esbuild to transpile TypeScript to JavaScript.
+  Skips type checking — it just strips types and runs. Much faster startup.
+  Handles ESM, CommonJS, .ts, .tsx, top-level await, etc. with zero config.
+  Has a watch mode: tsx watch script.ts.
+  Use when: you want to run a script fast and don't need type errors to block execution (your editor / tsc --noEmit in CI handles type checking separately)
