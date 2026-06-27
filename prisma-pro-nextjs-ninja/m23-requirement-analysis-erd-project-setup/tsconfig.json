@@ -14,7 +14,7 @@
     // For nodejs:
     "lib": ["ES2020"],
     "types": ["node"],
-    "moduleResolution": "Node",
+    // "moduleResolution": "Node",
 
     // Other Outputs
     "sourceMap": true,
