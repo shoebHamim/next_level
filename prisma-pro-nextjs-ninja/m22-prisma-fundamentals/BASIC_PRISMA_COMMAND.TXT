@@ -1,0 +1,2 @@
+1. Apply the migration files
+-> npx prisma migrate deploy
