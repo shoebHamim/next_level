@@ -2,9 +2,13 @@ import { Request, Response } from "express";
 import { postService } from "./post.service";
 
 const createPost = async (req: Request, res: Response) => {
-  console.log(req.body);
+  // console.log({body:req.body});
   try {
-    const result = await postService.createPost(req.body);
+    const userId = req.user?.id;
+    if (!userId) {
+      res.status(400).send("Something went wrong here!");
+    }
+    const result = await postService.createPost(req.body, userId as string);
     if (result) {
       res.status(201).json({
         message: "post created successfully",
