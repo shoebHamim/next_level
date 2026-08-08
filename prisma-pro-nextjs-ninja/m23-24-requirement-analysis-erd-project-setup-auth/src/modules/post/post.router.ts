@@ -28,9 +28,10 @@ export enum userRoles{
   SUPER_ADMIN="SUPER_ADMIN"
 
 }
-
-
-
 router.post("/", authMiddleware(userRoles.ADMIN,userRoles.USER,userRoles.SUPER_ADMIN), postControllers.createPost);
+router.get("/", authMiddleware(userRoles.ADMIN,userRoles.USER,userRoles.SUPER_ADMIN), postControllers.getAllPost);
+
+
+
 
 export const postRouter: Router = router;

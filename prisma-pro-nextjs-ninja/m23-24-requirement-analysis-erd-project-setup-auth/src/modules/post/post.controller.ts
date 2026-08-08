@@ -23,4 +23,22 @@ const createPost = async (req: Request, res: Response) => {
   }
 };
 
-export const postControllers = { createPost };
+const getAllPost = async (req: Request, res: Response) => {
+  try {
+    const {search} = req.query;
+    // console.log(search);
+    const allPost = await postService.getAllPost(search)
+    if (allPost) {
+      res.status(201).json({
+        message: "All post fetched successfully",
+        allPost,
+      });
+    } else {
+      res.status(500).send("Something went wrong!");
+    }
+  } catch (error) {
+    res.status(500).send("Something Went wrong!");
+  }
+};
+
+export const postControllers = { createPost, getAllPost };

@@ -13,6 +13,23 @@ const createPost = async (
   });
   return result;
 };
+
+const getAllPost=async(search?:
+  string | Record<string,unknown> | 
+  (Record<string,unknown>|string)[])=>{
+  const searchVal=typeof(search)=='string'?search: '';  
+  const result=await prisma.post.findMany({
+    where:{
+      title: {
+        contains: searchVal,
+        mode: "insensitive"
+      }
+    }
+  })
+  return result;
+  
+}
 export const postService = {
   createPost,
+  getAllPost
 };
