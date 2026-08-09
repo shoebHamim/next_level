@@ -33,6 +33,7 @@ const getAllPost = async (req: Request, res: Response) => {
     const { tags } = req.query;
     const { isFeatured } = req.query;
     const { status } = req.query;
+    const { page, limit } = req.query;
 
     const searchVal = typeof search === "string" ? search : "";
     const tagsVal =
@@ -47,16 +48,22 @@ const getAllPost = async (req: Request, res: Response) => {
 
     const isFeaturedVal =
       isFeatured === "true" ? true : isFeatured === "false" ? false : undefined;
+
+    const pageVal = Number.isNaN(Number(page)) ? undefined : Number(page);
+    const limitVal = Number.isNaN(Number(limit)) ? undefined : Number(limit);
+
     const allPost = await postService.getAllPost(
       searchVal,
       tagsVal,
       statusVal,
       isFeaturedVal,
+      pageVal,
+      limitVal,
     );
     if (allPost) {
       res.status(201).json({
         message: "All post fetched successfully",
-        allPost,
+        data: allPost,
       });
     } else {
       res.status(500).send("Something went wrong!");
@@ -67,4 +74,30 @@ const getAllPost = async (req: Request, res: Response) => {
   }
 };
 
-export const postControllers = { createPost, getAllPost };
+const getPostById = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    if (typeof id !== "string") {
+      return res.status(400).send({
+        success: false,
+        message: "id is required for this request!",
+      });
+    }
+    const fetchedPost = await postService.getPostById(id);
+    if (fetchedPost === null) {
+      res.status(404).json({
+        message: "No post found with the given ID",
+        data: fetchedPost,
+      });
+    }
+    res.status(200).json({
+      message: "Post fetched successfully",
+      data: fetchedPost,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Something Went wrong!");
+  }
+};
+
+export const postControllers = { createPost, getAllPost, getPostById };

@@ -30,6 +30,7 @@ export enum userRoles{
 }
 router.post("/", authMiddleware(userRoles.ADMIN,userRoles.USER,userRoles.SUPER_ADMIN), postControllers.createPost);
 router.get("/", authMiddleware(userRoles.ADMIN,userRoles.USER,userRoles.SUPER_ADMIN), postControllers.getAllPost);
+router.get("/:id", authMiddleware(userRoles.ADMIN,userRoles.USER,userRoles.SUPER_ADMIN), postControllers.getPostById);
 
 
 
