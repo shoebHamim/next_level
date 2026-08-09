@@ -1,4 +1,4 @@
-import { Post } from "../../generated/prisma/client";
+import { Post, PostStatus } from "../../generated/prisma/client";
 import { prisma } from "../../lib/prisma.config";
 
 const createPost = async (
@@ -6,30 +6,54 @@ const createPost = async (
   userId: string,
 ) => {
   const result = await prisma.post.create({
-    data:{
+    data: {
       ...data,
-      authorId: userId
-    }
+      author_id: userId,
+    },
   });
   return result;
 };
 
-const getAllPost=async(search?:
-  string | Record<string,unknown> | 
-  (Record<string,unknown>|string)[])=>{
-  const searchVal=typeof(search)=='string'?search: '';  
-  const result=await prisma.post.findMany({
-    where:{
-      title: {
-        contains: searchVal,
-        mode: "insensitive"
-      }
-    }
-  })
+const getAllPost = async (
+  searchVal: string,
+  tags: string[],
+  status: PostStatus | undefined,
+  isFeatured?: boolean,
+) => {
+  const result = await prisma.post.findMany({
+    where: {
+      OR: [
+        {
+          title: {
+            contains: searchVal,
+            mode: "insensitive",
+          },
+        },
+        {
+          content: {
+            contains: searchVal,
+            mode: "insensitive",
+          },
+        },
+        {
+          tags: {
+            has: searchVal,
+          },
+        },
+      ],
+      tags: {
+        hasEvery: tags,
+      },
+      // isFeatured: true, / isFeatured: false,
+      ...(isFeatured !== undefined && { isFeatured }),
+      ...(status != undefined && {
+        status: { equals: status },
+      }),
+    },
+  });
   return result;
-  
-}
+};
 export const postService = {
   createPost,
-  getAllPost
+  getAllPost,
 };
